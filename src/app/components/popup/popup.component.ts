@@ -27,8 +27,8 @@ export class PopupComponent implements OnInit {
   addNewSudent: FormGroup;
 
   genderOptions = [
-    { value: 'value', name: 'Male' },
-    { value: 'value', name: 'Female' },
+    { value: 'Male', name: 'Male' },
+    { value: 'Female', name: 'Female' },
   ];
   
 
