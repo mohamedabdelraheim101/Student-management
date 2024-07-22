@@ -1,0 +1,51 @@
+
+<form (ngSubmit)="save(addNewSudent)" [formGroup]="addNewSudent" class="p-4">
+
+<label for="name">Enter name:</label>  
+
+<input type="text" formControlName="name" class="form-control"> 
+<div *ngIf="addNewSudent.get('name')?.errors && addNewSudent.get('name')?.touched"  class="alert alert-danger">
+  <p *ngIf="addNewSudent.get('name')?.getError('required')">The name is required</p>
+  <P *ngIf="addNewSudent.get('name')?.getError('minlength')">Minimum length = 3</P>
+</div>
+
+
+<label for="email">Enter e-mail</label>
+<input type="email" formControlName="email" class="form-control" >
+<div *ngIf="addNewSudent.get('email')?.errors && addNewSudent.get('email')?.touched" class="alert alert-danger">
+  <p *ngIf="addNewSudent.get('email')?.getError('required') ">The e-mail is required</p>
+  <p *ngIf="addNewSudent.get('email')?.getError('email')" >The email is incorrect</p>
+</div>
+
+<label for="age">Enter age</label>
+<input type="number" formControlName="age" class="form-control" >
+<div *ngIf="addNewSudent.get('age')?.errors && addNewSudent.get('age')?.touched" class="alert alert-danger">
+  <p *ngIf="addNewSudent.get('age')?.getError('required') ">The age is required</p>
+  <p *ngIf="addNewSudent.get('age')?.getError('pattern')" >The age must be a number </p>
+</div>
+
+<label for="date">Enter date of birth</label>
+<input type="date" [formControlName]="'dateofbirth'" class="form-control"  [owlDateTime]="dt1" >
+<owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+<div *ngIf="addNewSudent.get('dateofbirth')?.errors && addNewSudent.get('dateofbirth')?.touched" class="alert alert-danger">
+  <p *ngIf="addNewSudent.get('dateofbirth')?.getError('required') ">The date of birth is required</p>
+</div>
+
+
+<label for="gender">Select Gender:</label>
+<ng-select
+  [items]="genderOptions"
+  bindLabel="name"
+  bindValue="value"
+  placeholder="Select gender"
+  formControlName="gender"
+  >
+</ng-select>
+<div *ngIf="addNewSudent.get('gender')?.errors && addNewSudent.get('gender')?.touched" class="alert alert-danger">
+  <p *ngIf="addNewSudent.get('gender')?.getError('required') ">The gender is required</p>
+</div>
+
+
+<button [disabled]="addNewSudent.invalid" type="submit" class="btn btn-primary "> Save </button>
+</form>
+

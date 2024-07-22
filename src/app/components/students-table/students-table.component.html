@@ -1,0 +1,52 @@
+<div class="buttons-flex">
+  <button class="btn btn-primary" (click)="openmodal()">Add new student </button>
+
+  <div *ngIf="isAnyStudentSelected()">
+    <button class="btn btn-danger" (click)="deleteSelectedStudents()">Delete Selected</button>
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      
+      <th>
+        <div >
+          <h6>Select All</h6>
+          <input type="checkbox" [checked]="selectAllChecked" (change)="toggleSelectAll()" />
+        </div>
+      </th>
+
+      <th>Name</th>
+      <th>Email</th>
+      <th>Age</th>
+      <th>Date of Birth</th>
+      <th>Gender</th>
+      <th>Actions</th>
+
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of student; let i = index">
+     
+      <td>
+        <input type="checkbox" [checked]="selectedIndices.has(i)" (change)="toggleStudentSelection(i)" />
+      </td>
+     
+      <td>{{ student.name }}</td>
+      <td>{{ student.email }}</td>
+      <td>{{ student.age }}</td>
+      <td>{{ student.dateofbirth ? (student.dateofbirth | date: 'yyyy-MM-dd') : 'N/A' }}</td>
+      <td>{{ student.gender }}</td>
+     
+      <td>
+        <button class="btn btn-warning btn-sm" (click)="editStudent(i)">Edit</button>
+      </td>
+
+    </tr>
+
+  </tbody>
+
+
+</table>
